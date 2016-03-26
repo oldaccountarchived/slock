@@ -4,7 +4,10 @@
     "version": "1.0.0",
     "description": "Dead simple E2E encryption on top of Facebook Messenger",
     "background": {
-        "scripts": ["background.js", "lib/jquery/dist/jquery.js"]
+        "scripts": [
+            "lib/jquery/dist/jquery.js",
+            "js/fb-background.js"
+        ]
     },
     "browser_action": {
         "default_popup": "popup.html",
@@ -16,20 +19,24 @@
         "js": [
             "lib/openpgp/dist/openpgp.js",
             "lib/jquery/dist/jquery.js",
-            "background.js",
-            "crypto-background.js",
-            "parse-background.js"
+            "js/fb-background.js",
+            "js/crypto-background.js",
+            "js/parse-background.js"
         ],
         "run_at": "document_idle",
         "all_frames": true
     }],
+    "web_accessible_resources": [
+        "img/unlocked.png", "img/locked.png"
+    ],
     "permissions": [
         "tabs",
         "storage",
         "http://*.facebook.com/*",
         "https://*.facebook.com/*",
         "https://*.messenger.com/*",
-        "http://*.messenger.com/*"
+        "http://*.messenger.com/*",
+        "http://127.0.0.1:4242/*"
     ],
-    "content_security_policy": "script-src 'self' blob: filesystem: chrome-extension-resource: https://graph.facebook.com; object-src 'self'"
+    "content_security_policy": "script-src 'self' blob: filesystem: chrome-extension-resource: https://graph.facebook.com; object-src 'self';"
 }

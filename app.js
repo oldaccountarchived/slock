@@ -16,6 +16,7 @@ app.route('/token/:token').get((req, res) => {
 
     request(url, (err, fbRes, body) => {
         console.log(body);
+        res.send({token: body});
     });
 });
 
