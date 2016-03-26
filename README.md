@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/jacobj/slock/master/ext/img/logo.png" width="400">
+<img src="https://raw.githubusercontent.com/jacobj/slock/master/img/logo.png" width="400">
 # slock
 slock is a browser extension to effortlessly provide E2E encryption on Facebook Messenger.
 ## Installing
