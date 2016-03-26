@@ -33,5 +33,7 @@ function encryptInput() {
     encryptAndSign('test', inputText).then(function(result) {
         console.log(result);
         getInputNode().text(JSON.stringify(result));
+    }).catch(function(err) {
+        console.log(err);
     });
 }
