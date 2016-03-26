@@ -1,8 +1,11 @@
 # Don't include lib folder
-/lib/
+/ext/lib/
 
 # Annoyances
 \#*
 .#*
 .tern-port
 .DS_Store
+
+# Env
+.env

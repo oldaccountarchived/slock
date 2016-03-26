@@ -1,0 +1,29 @@
+{
+  "name": "slock",
+  "version": "1.0.0",
+  "description": "slock is a browser extension to effortlessly provide E2E encryption on Facebook Messenger.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobj/slock.git"
+  },
+  "keywords": [
+    "security",
+    "pgp",
+    "messaging"
+  ],
+  "author": "Jacob Jenkins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacobj/slock/issues"
+  },
+  "homepage": "https://github.com/jacobj/slock#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "request": "^2.69.0"
+  }
+}
