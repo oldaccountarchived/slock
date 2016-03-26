@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "slock",
+    "version": "1.0.0",
+    "description": "Dead simple E2E encryption on top of Facebook Messenger",
+    "background": {
+        "scripts":["background.js", "lib/jquery/dist/jquery.js"]
+    },
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "img/icon.png"
+    },
+    "manifest_version": 2,
+    "permissions": [
+        "tabs",
+        "storage",
+        "http://*.facebook.com/*",
+        "https://*.facebook.com/*",
+        "https://*.messenger.com/*",
+        "http://*.messenger.com/*"
+    ],
+    "content_security_policy": "script-src 'self' blob: filesystem: chrome-extension-resource: https://graph.facebook.com; object-src 'self'"
+}
