@@ -45,6 +45,7 @@ function addPrivateKey(privKey, password) {
     // Get usable private key.
     privateKey = openpgp.key.readArmored(privKey).keys;
 
+    localStorage.privateKey = privateKey;
     // TODO: Save to chrome storage.
     // chrome.storage.local.set({'privateKey': privateKey});
 
@@ -96,6 +97,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     case "add key":
         console.log("Adding new key...");
         addPrivateKey(request.key, request.password);
+        decryptTextNodes();
         break;
     default:
         console.log("Message type is not valid.");

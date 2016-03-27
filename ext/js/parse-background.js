@@ -26,6 +26,34 @@ function parseInput() {
 
 function decryptTextNodes() {
     var textArr = parseTextNodes();
+    var myId;
+
+    getMyIdAndKey().then(function(result) {
+        myId = result.id;
+        var promises = textArr.toArray().map(function(text) {
+            try {
+                var payload = JSON.parse(text);
+                if (payload.recieverId) {
+                    return decrypt(payload.recieverId, payload[myId]);
+                } else {
+                    return new Promise(function(resolve, reject) {
+                        resolve(text);
+                    });
+                }
+            } catch (err) {
+                return new Promise(function(resolve, reject) {
+                    resolve(text);
+                });
+            }
+        });
+
+        Promise.all(promises).then(function(decrypted) {
+            var textNodes = getTextNodes();
+            for (var i = 0; i < decrypted.length; i++) {
+                $(textNodes[i]).text(decrypted[i].data);
+            }
+        });
+    });
 }
 
 function getName() {
@@ -54,3 +82,19 @@ function encryptInput() {
         console.log(err);
     });
 }
+
+$(document).ready(function() {
+    setTimeout(function() {
+        decryptTextNodes();
+    }, 1000);
+
+    var numOfNodes = getTextNodes().length;
+
+    setInterval(function() {
+        if (numOfNodes != getTextNodes().length) {
+            decryptTextNodes();
+            numOfNodes = getTextNodes().length;
+        }
+    }, 1000);
+});
+
