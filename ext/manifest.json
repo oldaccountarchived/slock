@@ -6,7 +6,6 @@
     "background": {
         "scripts": [
             "lib/jquery/dist/jquery.js",
-            "lib/lodash/dist/lodash.js",
             "js/fb-auth.js"
         ]
     },
@@ -23,7 +22,6 @@
         "js": [
             "lib/openpgp/dist/openpgp.js",
             "lib/jquery/dist/jquery.js",
-            "lib/lodash/dist/lodash.js",
             "js/crypto-background.js",
             "js/parse-background.js",
             "js/fb-background.js",
