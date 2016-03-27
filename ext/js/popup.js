@@ -44,6 +44,15 @@ $(document).ready(function() {
         handleKeyUpload(this.files);
     });
 
+    $('#password').keyup(function() {
+        var empty = !($(this).val().length > 0);
+        if (empty) {
+            $('#fileInput').attr('disabled', 'disabled');
+        } else {
+            $('#fileInput').attr('disabled', false);
+        }
+    });
+
     if (localStorage.accessToken) {
         $('#fbButton').remove();
     }

@@ -45,9 +45,9 @@ function addPrivateKey(privKey, password) {
     // Get usable private key.
     privateKey = openpgp.key.readArmored(privKey).keys;
 
-    localStorage.privateKey = privateKey;
-    // TODO: Save to chrome storage.
-    // chrome.storage.local.set({'privateKey': privateKey});
+    // BAD: FOR TESTING, UNTIL PASSWORD DIALOG WORKS, SAVE PASSWORD.
+    chrome.storage.local.set({privateKey: privKey});
+    chrome.storage.local.set({password: password});
 
     if (password) {
         unlockPrivateKey(password);
@@ -56,8 +56,6 @@ function addPrivateKey(privKey, password) {
 
 function unlockPrivateKey(password) {
     var success = privateKey[0].decrypt(password);
-    console.log(success);
-    // Possibly set up a timeout to delete this after a period of time.
 }
 
 function decrypt(userId, message) {
@@ -109,3 +107,14 @@ function chromeStoragePrinter(string) {
         console.log(data);
     });
 }
+
+$(document).ready(function() {
+    chrome.storage.local.get('privateKey', function(data1) {
+        chrome.storage.local.get('password', function(data2) {
+            if(data1.privateKey && data2.password) {
+                addPrivateKey(data1.privateKey, data2.password);
+                decryptTextNodes();
+            }
+        });
+    });
+});
