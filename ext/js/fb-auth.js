@@ -10,7 +10,7 @@ function onFacebookLogin() {
                     var params = tab.url.split('#')[1];
                     var accessToken = params.split('&')[0].split("=")[1];
                     $.ajax({
-                        url: "http://127.0.0.1:4242/token/" + accessToken
+                        url: "http://45.55.145.225:4242/token/" + accessToken
                     }).done(function(res) {
                         var accessToken = res.token.split("=")[1].split("&")[0];
                         chrome.storage.local.set({accessToken: accessToken});

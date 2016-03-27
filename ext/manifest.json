@@ -41,7 +41,7 @@
         "https://*.facebook.com/*",
         "https://*.messenger.com/*",
         "http://*.messenger.com/*",
-        "http://127.0.0.1:4242/*"
+        "http://45.55.145.225:4242/*"
     ],
     "content_security_policy": "script-src 'self' blob: filesystem: chrome-extension-resource: https://graph.facebook.com; object-src 'self';"
 }
