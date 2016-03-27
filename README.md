@@ -18,5 +18,5 @@ Until then, you can test out the dev builds by:
 There's tons of work to still be done! Check out the [issues](https://github.com/jacobj/slock/issues)!
 
 ## Thanks
-Thanks to Kelly Mahoney for the fantastic Slock sloth logo!
-Thanks to James Risberg @jamesrisberg for creating the majority of the project page!
+- Thanks to Kelly Mahoney for the fantastic Slock sloth logo!
+- Thanks to James Risberg @jamesrisberg for creating the majority of the project page!
