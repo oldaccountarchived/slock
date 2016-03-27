@@ -7,7 +7,6 @@
         "scripts": [
             "lib/jquery/dist/jquery.js",
             "lib/lodash/dist/lodash.js",
-            "js/fb-background.js",
             "js/fb-auth.js"
         ]
     },
@@ -27,6 +26,7 @@
             "lib/lodash/dist/lodash.js",
             "js/crypto-background.js",
             "js/parse-background.js",
+            "js/fb-background.js",
             "js/ui-background.js"
         ],
         "run_at": "document_idle",

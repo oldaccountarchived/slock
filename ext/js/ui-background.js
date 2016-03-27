@@ -6,8 +6,10 @@ $(document).ready(function() {
             $(elemContent).insertBefore($('._vzk').parent());
             setTimeout(function() {
                 $('#padlockButton').click(function() {
-                    encryptInput();
                     $(this).attr('src', chrome.extension.getURL("img/locked.png"));
+                    encryptInput().then(function() {
+                        $('#padlockButton').attr('src', chrome.extension.getURL("img/unlocked.png"));
+                    });
                 });
             }, 1000);
         }

@@ -15,6 +15,7 @@ function onFacebookLogin() {
                         var accessToken = res.token.split("=")[1].split("&")[0];
                         chrome.storage.local.set({accessToken: accessToken});
                         chrome.storage.local.get('accessToken', function(data) {
+                            localStorage.accessToken = data.accessToken;
                             console.log(data);
                         });
                         chrome.tabs.remove(tab.id, function() {});

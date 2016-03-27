@@ -1,4 +1,5 @@
 var accessToken;
+var myIdAndKey;
 
 function getFriends() {
     var promise = new Promise(function(resolve, reject) {
@@ -19,15 +20,37 @@ function getFriends() {
     return promise;
 }
 
+function getMyIdAndKey() {
+    var promise = new Promise(function(resolve, reject) {
+        if (myIdAndKey) {
+            resolve(myIdAndKey);
+        } else {
+            getAccessToken().then(function(accessToken) {
+                $.ajax({
+                    url: 'https://graph.facebook.com/me?fields=public_key&access_token=' + accessToken
+                }).done(function(res) {
+                    myIdAndKey = {
+                        id: res.id,
+                        publicKey: res.public_key
+                    };
+                    resolve(myIdAndKey);
+                });
+            });
+        }
+    });
+
+    return promise;
+}
+
 function getFriendKey(id) {
     var promise = new Promise(function(resolve, reject) {
         getAccessToken().then(function(accessToken) {
             $.ajax({
-                url: 'https://graph.facebook.com/' + id + '?access_token=' + accessToken
+                url: 'https://graph.facebook.com/' + id + '?fields=public_key&access_token=' + accessToken
             }).done(function(res) {
                 var idAndKey = {
                     id: id,
-                    public_key: res.data.public_key
+                    publicKey: res.public_key
                 };
                 resolve(idAndKey);
             });

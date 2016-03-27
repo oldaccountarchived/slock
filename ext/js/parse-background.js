@@ -28,16 +28,28 @@ function decryptTextNodes() {
     var textArr = parseTextNodes();
 }
 
+function getName() {
+    return $('._17w2').text();
+}
+
 function encryptInput() {
     var inputText = parseInput();
-    encryptAndSign('test', inputText).then(function(result) {
-        console.log(result);
-        getInputNode().text(JSON.stringify(result));
-        decrypt('test', result.data).then(function(result) {
-            console.log(result);
-        }).catch(function(err) {
-            console.log(err);
-        });
+    var payload = {};
+    var recieverId, senderId;
+
+    return getFriends().then(function(nameToId) {
+        recieverId = nameToId[getName()];
+        payload.recieverId = recieverId;
+        return encryptAndSign(recieverId, inputText);
+    }).then(function(result) {
+        payload[recieverId] = result.data;
+        return getMyIdAndKey();
+    }).then(function(result) {
+        senderId = result.id;
+        return encryptAndSign(senderId, inputText);
+    }).then(function(result) {
+        payload[senderId] = result.data;
+        getInputNode().text(JSON.stringify(payload));
     }).catch(function(err) {
         console.log(err);
     });
