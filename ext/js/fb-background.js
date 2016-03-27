@@ -1,25 +1,52 @@
-var successURL = 'https://www.facebook.com/connect/login_success.html';
+var accessToken;
 
-// Modified from https://github.com/nobuf/facebook-connect-for-chrome-extension
-function onFacebookLogin() {
-    if (!localStorage.accessToken) {
-        chrome.tabs.getAllInWindow(null, function(tabs) {
-            tabs.forEach(function(tab) {
-                if (tab.url.indexOf(successURL) == 0) {
-                    chrome.tabs.onUpdated.removeListener(onFacebookLogin);
-                    var params = tab.url.split('#')[1];
-                    var accessToken = params.split('&')[0].split("=")[1];
-                    $.ajax({
-                        url: "http://127.0.0.1:4242/token/" + accessToken
-                    }).done(function(data) {
-                        localStorage.accessToken = data.token.split("=")[1].split("&")[0];
-                        chrome.tabs.remove(tab.id, function() {}); 
-                    });
-                    return;
-                }
+function getFriends() {
+    var promise = new Promise(function(resolve, reject) {
+        getAccessToken().then(function(accessToken) {
+            $.ajax({
+                url: 'https://graph.facebook.com/me/friends?access_token=' + accessToken
+            }).done(function(res) {
+                var nameToId = {};
+                res.data.forEach(function(friend) {
+                    nameToId[friend.name] = friend.id;
+                });
+                console.log(nameToId);
+                resolve(nameToId);
             });
         });
-    }
+    });
+
+    return promise;
 }
 
-chrome.tabs.onUpdated.addListener(onFacebookLogin);
+function getFriendKey(id) {
+    var promise = new Promise(function(resolve, reject) {
+        getAccessToken().then(function(accessToken) {
+            $.ajax({
+                url: 'https://graph.facebook.com/' + id + '?access_token=' + accessToken
+            }).done(function(res) {
+                var idAndKey = {
+                    id: id,
+                    public_key: res.data.public_key
+                };
+                resolve(idAndKey);
+            });
+        });
+    });
+
+    return promise;
+}
+
+function getAccessToken() {
+    var promise = new Promise(function(resolve, reject) {
+        if (accessToken) {
+            resolve(accessToken);
+        } else {
+            chrome.storage.local.get('accessToken', function(data) {
+                resolve(data.accessToken);
+            });
+        }
+    });
+
+    return promise;
+}

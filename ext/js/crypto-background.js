@@ -88,3 +88,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         console.log("Message type is not valid.");
     }
 });
+
+function chromeStoragePrinter(string) {
+    chrome.storage.local.get(string, function(data) {
+        console.log(data);
+    });
+}

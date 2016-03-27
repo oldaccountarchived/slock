@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "jquery": "~2.2.2",
+    "lodash": "~4.6.1",
     "Materialize": "materialize#~0.97.5",
     "openpgp": "~2.2.0"
   }

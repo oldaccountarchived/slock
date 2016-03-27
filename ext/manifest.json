@@ -6,7 +6,9 @@
     "background": {
         "scripts": [
             "lib/jquery/dist/jquery.js",
-            "js/fb-background.js"
+            "lib/lodash/dist/lodash.js",
+            "js/fb-background.js",
+            "js/fb-auth.js"
         ]
     },
     "browser_action": {
@@ -14,12 +16,15 @@
         "default_icon": "img/icon.png"
     },
     "content_scripts": [{
-        "matches": ["https://*.messenger.com/*", "http://*.messenger.com/*"],
+        "matches": [
+            "https://*.messenger.com/*",
+            "http://*.messenger.com/*"
+        ],
         "css": [],
         "js": [
             "lib/openpgp/dist/openpgp.js",
             "lib/jquery/dist/jquery.js",
-            "js/fb-background.js",
+            "lib/lodash/dist/lodash.js",
             "js/crypto-background.js",
             "js/parse-background.js",
             "js/ui-background.js"
@@ -28,7 +33,8 @@
         "all_frames": true
     }],
     "web_accessible_resources": [
-        "img/unlocked.png", "img/locked.png"
+        "img/unlocked.png",
+        "img/locked.png"
     ],
     "permissions": [
         "tabs",
