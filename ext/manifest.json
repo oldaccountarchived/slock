@@ -21,7 +21,8 @@
             "lib/jquery/dist/jquery.js",
             "js/fb-background.js",
             "js/crypto-background.js",
-            "js/parse-background.js"
+            "js/parse-background.js",
+            "js/ui-background.js"
         ],
         "run_at": "document_idle",
         "all_frames": true

@@ -1,6 +1,9 @@
 # Don't include lib folder
 /ext/lib/
 
+# No node modules
+/node_modules/
+
 # Annoyances
 \#*
 .#*
