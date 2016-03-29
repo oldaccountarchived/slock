@@ -37,6 +37,9 @@
     "permissions": [
         "tabs",
         "storage",
+        "webRequest",
+        "*://*/*",
+        "clipboardWrite",
         "http://*.facebook.com/*",
         "https://*.facebook.com/*",
         "https://*.messenger.com/*",

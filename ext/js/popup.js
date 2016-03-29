@@ -1,20 +1,4 @@
-if (localStorage.accessToken) {
-    var graphUrl = "https://graph.facebook.com/me?" + localStorage.accessToken + "&callback=displayUser";
-    console.log(graphUrl);
-
-    function displayUser(user) {
-        console.log(user);
-    }
-
-    window.onload = function() {
-        var script = document.createElement("script");
-        script.src = graphUrl;
-        document.body.appendChild(script);
-    };
-}
-
-function handleKeyUpload(files) {
-    var file = files[0];
+function handleKeyUpload(file, password) {
     var fileReader = new FileReader();
 
     fileReader.onload = function(event) {
@@ -22,7 +6,7 @@ function handleKeyUpload(files) {
         var message = {
             messageType: "add key",
             key: content,
-            password: $('#password').val()
+            password: password
         };
 
         chrome.tabs.query({}, function(tabs) {
@@ -32,28 +16,53 @@ function handleKeyUpload(files) {
                 });
             });
         });
-
-        console.log(content);
     };
 
     fileReader.readAsText(file);
 }
 
-$(document).ready(function() {
-    $('#fileInput').change(function() {
-        handleKeyUpload(this.files);
-    });
+function stateUploadOrGenerateKey() {
+    $('#facebookAuth').hide();
+    $('#privateKeyChoice').show();
 
-    $('#password').keyup(function() {
-        var empty = !($(this).val().length > 0);
-        if (empty) {
-            $('#fileInput').attr('disabled', 'disabled');
-        } else {
-            $('#fileInput').attr('disabled', false);
-        }
-    });
+    // Add buttonlisteners.
+    $('#uploadKeyButton')
+        .click(statePrivateKeyUpload);
+    $('#genKeyButton')
+        .click(stateKeypairGeneration);
+}
 
-    if (localStorage.accessToken) {
-        $('#fbButton').remove();
+function statePrivateKeyUpload() {
+    $('#privateKeyChoice').hide();
+    $('#privateKeyUpload').show();
+
+    // Add button listeners.
+    $('#doUploadButton')
+        .click(doPrivateKeyUpload);
+}
+
+function doPrivateKeyUpload() {
+    var file = $('#fileInput')[0].files[0];
+    if ($('#password').val() && file) {
+        handleKeyUpload(
+            file,
+            $('#password').val()
+        );
+    } else {
+        console.log('An error occured!');
+        // Display an error
     }
-});
+}
+
+function stateKeypairGeneration() {
+    $('#privateKeyChoice').hide();
+    $('#keyPairGeneration').show();
+}
+
+function onDocumentReady() {
+    if (localStorage.accessToken) {
+        stateUploadOrGenerateKey();
+    }
+}
+
+$(document).ready(onDocumentReady);

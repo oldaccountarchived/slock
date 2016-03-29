@@ -89,10 +89,13 @@ $(document).ready(function() {
     }, 1000);
 
     var numOfNodes = getTextNodes().length;
+    var nodes = getTextNodes();
 
     setInterval(function() {
-        if (numOfNodes != getTextNodes().length) {
+        var length = getTextNodes().length - 1;
+        if (numOfNodes != getTextNodes().length || getTextNodes()[length] !== nodes[length]) {
             decryptTextNodes();
+            nodes = getTextNodes();
             numOfNodes = getTextNodes().length;
         }
     }, 1000);

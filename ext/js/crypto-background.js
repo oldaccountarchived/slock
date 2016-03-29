@@ -46,8 +46,12 @@ function addPrivateKey(privKey, password) {
     privateKey = openpgp.key.readArmored(privKey).keys;
 
     // BAD: FOR TESTING, UNTIL PASSWORD DIALOG WORKS, SAVE PASSWORD.
-    chrome.storage.local.set({privateKey: privKey});
-    chrome.storage.local.set({password: password});
+    chrome.storage.local.set({
+        privateKey: privKey
+    });
+    chrome.storage.local.set({
+        password: password
+    });
 
     if (password) {
         unlockPrivateKey(password);
@@ -62,7 +66,7 @@ function decrypt(userId, message) {
     return getPublicKey(userId).then(function(publicKey) {
         try {
             message = openpgp.message.readArmored(message);
-        } catch(err) {
+        } catch (err) {
             // Something is wrong with the message, alert the user.
             console.log(err);
         }
@@ -90,15 +94,27 @@ function encryptAndSign(userId, message) {
     });
 }
 
+function generateKeyPair(name, email, password) {
+    var options = {
+        userIds: [{ name: name, email: email}],
+        numBits: 4096,
+        passphrase: password
+    };
+
+    openpgp.generateKey(options).then(function(key) {
+        // Do something with the key.
+    });
+}
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    switch(request.messageType) {
-    case "add key":
-        console.log("Adding new key...");
-        addPrivateKey(request.key, request.password);
-        decryptTextNodes();
-        break;
-    default:
-        console.log("Message type is not valid.");
+    switch (request.messageType) {
+        case "add key":
+            console.log("Adding new key...");
+            addPrivateKey(request.key, request.password);
+            decryptTextNodes();
+            break;
+        default:
+            console.log("Message type is not valid.");
     }
 });
 
@@ -111,7 +127,7 @@ function chromeStoragePrinter(string) {
 $(document).ready(function() {
     chrome.storage.local.get('privateKey', function(data1) {
         chrome.storage.local.get('password', function(data2) {
-            if(data1.privateKey && data2.password) {
+            if (data1.privateKey && data2.password) {
                 addPrivateKey(data1.privateKey, data2.password);
                 decryptTextNodes();
             }

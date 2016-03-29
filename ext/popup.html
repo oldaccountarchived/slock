@@ -16,15 +16,36 @@
     <div class="centerify">
         <div class="centerify-item">
             <img width="300px" src="img/logo.png">
-            <div class="row">
+            <div id="facebookAuth" class="row">
                 <a id="fbButton" class="waves-effect waves-light btn blue btn-block" target="_blank" href="https://www.facebook.com/dialog/oauth?client_id=965274686854855&response_type=token&scope=email,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html">Login to Facebook</a>
-                <a id="genKeyButton" class="btn-block waves-effect waves-light btn purple btn-block">Generate Keypair</a>
-                <input type="file" id="fileInput" disabled>
-                <label for="fileInput" class="btn-block waves-effect waves-light btn green">Add Private Key</label>
+            </div>
+            <div id="privateKeyChoice" class="row" style="display: none">
+                <a id="genKeyButton" class="btn-block waves-effect waves-light btn purple btn-block">Generate Public/Private Keypair</a>
+                <a id="uploadKeyButton" class="btn-block waves-effect waves-light btn teal">Upload Private Key</a>
+            </div>
+            <div id="privateKeyUpload" class="row" style="display: none">
+                <input type="file" id="fileInput">
+                <label for="fileInput" class="btn-block waves-effect waves-light btn teal">Choose File...</label>
                 <div class="input-field col s12">
                     <input id="password" type="password">
                     <label for="password">Private Key Password</label>
                 </div>
+                <a id="doUploadButton" class="btn-block waves-effect waves-light btn green">Upload It!</a>
+            </div>
+            <div id="keyPairGeneration" class="row" style="display: none">
+                <div class="input-field col s12">
+                    <input id="name" type="text">
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="email" type="text">
+                    <label for="email">Email Address</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="genPassword" type="password">
+                    <label for="genPassword">Private Key Password</label>
+                </div>
+                <a id="doGenerateButton" class="btn-block waves-effect waves-light btn green">Generate It!</a>
             </div>
         </div>
     </div>
