@@ -1,5 +1,5 @@
 # Don't include lib folder
-/ext/lib/
+/chrome/lib/
 
 # No node modules
 /node_modules/

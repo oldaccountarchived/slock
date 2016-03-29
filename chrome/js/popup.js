@@ -16,6 +16,8 @@ function handleKeyUpload(file, password) {
                 });
             });
         });
+
+        statePrivateKeyUploaded();
     };
 
     fileReader.readAsText(file);
@@ -39,6 +41,11 @@ function statePrivateKeyUpload() {
     // Add button listeners.
     $('#doUploadButton')
         .click(doPrivateKeyUpload);
+}
+
+function statePrivateKeyUploaded() {
+    $('#privateKeyUpload').hide();
+    $('#privateKeyUploaded').show();
 }
 
 function doPrivateKeyUpload() {

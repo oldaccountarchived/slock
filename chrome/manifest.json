@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "slock",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Dead simple E2E encryption on top of Facebook Messenger",
     "background": {
         "scripts": [
@@ -46,5 +46,10 @@
         "http://*.messenger.com/*",
         "http://45.55.145.225:4242/*"
     ],
+    "icons": {
+        "16": "img/icon.png",
+        "48": "img/icon.png",
+        "128": "img/icon.png"
+    },
     "content_security_policy": "script-src 'self' blob: filesystem: chrome-extension-resource: https://graph.facebook.com; object-src 'self';"
 }

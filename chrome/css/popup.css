@@ -4,7 +4,7 @@ html {
 
 body {
     min-width: 300px;
-    min-height: 400px;
+    max-height: 900px;
 }
 
 .centerify {
@@ -30,4 +30,10 @@ input[type="file"] {
 .btn-block {
     display: block;
     margin: 5px;
+}
+
+.large-text {
+    font-size: 22pt;
+    font-weight: 200;
+    padding: 0px 25px;
 }
