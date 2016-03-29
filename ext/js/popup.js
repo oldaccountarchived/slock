@@ -43,11 +43,9 @@ function statePrivateKeyUpload() {
 
 function doPrivateKeyUpload() {
     var file = $('#fileInput')[0].files[0];
-    if ($('#password').val() && file) {
-        handleKeyUpload(
-            file,
-            $('#password').val()
-        );
+    var password = $('#password').val();
+    if (password && file) {
+        handleKeyUpload(file, password);
     } else {
         console.log('An error occured!');
         // Display an error
