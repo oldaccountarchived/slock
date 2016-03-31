@@ -16,14 +16,20 @@
     <div class="centerify">
         <div class="centerify-item">
             <img width="300px" src="img/logo.png">
+
+            <!-- Facebook Auth State -->
             <div id="facebookAuth" class="row">
                 <a id="fbButton" class="waves-effect waves-light btn blue btn-block" target="_blank" href="https://www.facebook.com/dialog/oauth?client_id=965274686854855&response_type=token&scope=email,user_friends&redirect_uri=http://www.facebook.com/connect/login_success.html">Login to Facebook</a>
             </div>
-            <div id="privateKeyChoice" class="row" style="display: none">
+
+            <!-- Private Key Choice State -->
+            <div id="privateKeyChoice" class="row" style="display: none;">
                 <a id="genKeyButton" class="btn-block waves-effect waves-light btn purple btn-block">Generate Public/Private Keypair</a>
                 <a id="uploadKeyButton" class="btn-block waves-effect waves-light btn teal">Upload Private Key</a>
             </div>
-            <div id="privateKeyUpload" class="row" style="display: none">
+
+            <!-- Private Key Upload State -->
+            <div id="privateKeyUpload" class="row" style="display: none;">
                 <input type="file" id="fileInput">
                 <label for="fileInput" class="btn-block waves-effect waves-light btn teal">Choose File...</label>
                 <div class="input-field col s12">
@@ -32,10 +38,14 @@
                 </div>
                 <a id="doUploadButton" class="btn-block waves-effect waves-light btn green">Upload It!</a>
             </div>
-            <div id="privateKeyUploaded" class="row" style="display: none">
-              <p class="large-text">Your private key was successfully uploaded!</p>
+
+            <!-- Private Key Uploaded State -->
+            <div id="privateKeyUploaded" class="row" style="display: none;">
+                <p class="large-text">Your private key was successfully uploaded!</p>
             </div>
-            <div id="keyPairGeneration" class="row" style="display: none">
+
+            <!-- Key Pair Generation State -->
+            <div id="keyPairGeneration" class="row" style="display: none;">
                 <div class="input-field col s12">
                     <input id="name" type="text">
                     <label for="name">Your Name</label>
@@ -49,6 +59,11 @@
                     <label for="genPassword">Private Key Password</label>
                 </div>
                 <a id="doGenerateButton" class="btn-block waves-effect waves-light btn green">Generate It!</a>
+            </div>
+
+            <!-- Key Pair Generated State -->
+            <div id="keyPairGenerated" style="display: none;">
+
             </div>
         </div>
     </div>
