@@ -7,7 +7,7 @@ Slock uses public key cryptography to automatically encrypt your chats on Facebo
 
 No private keys or passwords are ever sent over the network! All encryption and decryption is done client side!
 
-**NOTE:** Slock is under heavy development and should be in a shippable state soon.
+**NOTE:** Slock is under heavy development and should be in a shippable state soon. As such, it's currently not suitable for truly secure chat.
 
 ## Installing
 When completed, slock will be available in the Chrome Web Store.
