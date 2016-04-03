@@ -48,7 +48,7 @@ function decryptTextNodes() {
         });
 
         Promise.all(promises).then(function(decrypted) {
-            var textNodes = getTextNodes();
+            var textNodes = getTextNodes().children();
             for (var i = 0; i < decrypted.length; i++) {
                 $(textNodes[i]).text(decrypted[i].data);
             }
@@ -90,7 +90,8 @@ function encryptInput() {
         return encryptAndSign(senderId, inputText);
     }).then(function(result) {
         payload[senderId] = result.data;
-        getInputNode().text(JSON.stringify(payload));
+        // getInputNode().text(JSON.stringify(payload));
+        sendMessage(JSON.stringify(payload), senderId, recieverIds[0]);
     }).catch(function(err) {
         console.log(err);
     });

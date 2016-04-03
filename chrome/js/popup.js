@@ -1,5 +1,6 @@
 /*global chrome, $, FileReader, localStorage*/
 
+// Uploads key to messenger tabs.
 function handleKeyUpload(file, password) {
     var fileReader = new FileReader();
 
@@ -13,7 +14,7 @@ function handleKeyUpload(file, password) {
         };
 
         // Send key and password to open Facebook Messenger tab.
-        sendToMessengerTabs(message);
+        sendToMessengerTabs(message, console.log);
 
         // Go to uploaded state.
         statePrivateKeyUploaded();
@@ -22,14 +23,18 @@ function handleKeyUpload(file, password) {
     fileReader.readAsText(file);
 }
 
-function sendToMessengerTabs(message) {
+// These two functions should do browser specific things.
+// They should probably be split into separate files.
+function sendToMessengerTabs(message, cb) {
     chrome.tabs.query({}, function(tabs) {
         tabs.forEach(function(tab) {
-            chrome.tabs.sendMessage(tab.id, message, function(response) {
-                console.log(response);
-            });
+            chrome.tabs.sendMessage(tab.id, message, cb);
         });
     });
+}
+
+function sendToBackground(message, cb) {
+    chrome.extension.sendMessage(message, cb);
 }
 
 function doPrivateKeyUpload() {
@@ -44,6 +49,19 @@ function doPrivateKeyUpload() {
 }
 
 function doKeypairGeneration() {
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+
+    var message = {
+        name: name,
+        email: email,
+        password: password
+    };
+
+    sendToBackground(message, function(response) {
+        // Do something with the key
+    });
 }
 
 // State transitions.
